@@ -140,7 +140,7 @@ endif
 " プラグインをインストールするディレクトリ
 let s:plugin_dir = expand('~/.vim/bundles')
 " dein.vim をインストールするディレクトリ
-let s:dein_dir = s:plugin_dir . 'repos/github.com/Shougo/dein.vim'
+let s:dein_dir = s:plugin_dir . '/repos/github.com/Shougo/dein.vim'
 
 " Required:
 execute 'set runtimepath+=' . s:dein_dir
@@ -163,6 +163,9 @@ if dein#load_state(s:plugin_dir)
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
 
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/vimfiler.vim')
+
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
@@ -182,3 +185,8 @@ endif
 
 "End dein Scripts-------------------------
 
+
+"vimfiler Scripts-----------------------------
+let g:vimfiler_as_default_explorer = 1
+
+"End vimfiler Scripts-------------------------
