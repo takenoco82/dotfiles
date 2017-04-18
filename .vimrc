@@ -78,6 +78,8 @@ set listchars=tab:>-,extends:<,trail:-,eol:<
 set hlsearch
 set number
 
+set foldmethod=marker
+
 "===========================================================================
 " Mappings
 "===========================================================================
@@ -132,7 +134,7 @@ command! Reloadgvimrc  :<C-u>source $MYGVIMRC<CR>
 "===========================================================================
 " Scripts
 "===========================================================================
-"dein Scripts-----------------------------
+"dein Scripts----------------------------- {{{
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -166,6 +168,9 @@ if dein#load_state(s:plugin_dir)
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/vimfiler.vim')
 
+  " colorscheme
+  call dein#add('altercation/vim-colors-solarized')
+
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
@@ -176,17 +181,25 @@ endif
 
 " Required:
 filetype plugin indent on
+
+" カラースキーマ の設定
 syntax enable
+set background=dark
+augroup load_colorscheme
+  autocmd!
+  autocmd VimEnter * nested colorscheme solarized
+augroup END
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
   call dein#install()
 endif
 
-"End dein Scripts-------------------------
+"End dein Scripts------------------------- }}}
 
 
-"vimfiler Scripts-----------------------------
+"vimfiler Scripts------------------------- {{{
 let g:vimfiler_as_default_explorer = 1
 
-"End vimfiler Scripts-------------------------
+"End vimfiler Scripts--------------------- }}}
+
