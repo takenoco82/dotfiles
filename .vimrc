@@ -67,18 +67,75 @@ else
   let $MYVIMRUNTIME = $HOME . '/.vim'
 endif
 
-set backup
-set backupdir=$MYVIMRUNTIME/backup
-set undodir=$MYVIMRUNTIME/backup
-
+"------------------------------------------------------------------------------
+" 検索の挙動に関する設定:
+"
+" インクリメンタルサーチをする
 set incsearch
-set list
-set listchars=tab:>-,extends:<,trail:-,eol:<
-
+" 検索時に大文字小文字を無視
+set ignorecase
+" 大文字小文字の両方が含まれている場合は大文字小文字を区別
+set smartcase
+" 検索時にファイルの最後まで行ったら最初に戻る
+set wrapscan
+" 検索にマッチする箇所を強調表示する
 set hlsearch
-set number
 
+"------------------------------------------------------------------------------
+" 編集に関する設定:
+"
+" タブの画面上での幅
+set tabstop=4
+" タブをスペースに展開しない
+set noexpandtab
+" 自動的にインデントする
+set autoindent
+" バックスペースでインデントや改行を削除できるようにする
+set backspace=indent,eol,start
+" 括弧入力時に対応する括弧を表示
+set showmatch
+" 折り畳みの種類 (marker:マーカーで折り畳みを指定する。)
 set foldmethod=marker
+
+"------------------------------------------------------------------------------
+" GUI固有ではない画面表示の設定:
+"
+" 行番号を非表示
+set number
+" ルーラーを表示
+set ruler
+" タブや改行を表示
+set list
+" どの文字でタブや改行を表示するかを設定
+set listchars=tab:>-,extends:<,trail:-,eol:<
+" 長い行を折り返して表示
+set wrap
+" 常にステータス行を表示
+set laststatus=2
+" コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
+set cmdheight=2
+" コマンドをステータス行に表示
+set showcmd
+" コマンドライン補完するときに強化されたものを使う
+set wildmenu
+" タイトルを表示
+set title
+
+"------------------------------------------------------------------------------
+" ファイル操作に関する設定:
+"
+" バックアップファイルを作成する
+set backup
+" バックアップファイル用ディレクトリ
+set backupdir=$MYVIMRUNTIME/backup
+" アンドゥファイルを作成する
+set undofile
+" アンドゥファイル用のディレクトリ
+set undodir=$MYVIMRUNTIME/backup
+" スワップファイルを作成する
+set swapfile
+" スワップファイル用ディレクトリ
+set directory=$MYVIMRUNTIME/tmp
 
 "===========================================================================
 " Mappings
