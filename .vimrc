@@ -223,6 +223,7 @@ if dein#load_state(s:plugin_dir)
   call dein#add('Shougo/neosnippet-snippets')
 
   call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/vimfiler.vim')
 
   " colorscheme
@@ -260,3 +261,55 @@ let g:vimfiler_as_default_explorer = 1
 
 "End vimfiler Scripts--------------------- }}}
 
+
+"unite Scripts---------------------------- {{{
+" http://www.karakaram.com/unite
+" http://d.hatena.ne.jp/osyo-manga/20130307/1362621589
+
+" プレフィックスキー
+nnoremap [unite] <Nop>
+nmap <Space>j [unite]
+
+" 現在開いているファイルのディレクトリ下のファイル一覧。
+" 開いていない場合はカレントディレクトリ
+nnoremap <silent> [unite]j :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" バッファ一覧
+nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+" 最近使用したファイル一覧
+nnoremap <silent> [unite]h :<C-u>Unite file_mru<CR>
+" ブックマーク一覧
+nnoremap <silent> [unite]f :<C-u>Unite bookmark<CR>
+" ブックマークに追加
+nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
+
+"uniteを開いている間のキーマッピング
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()"{{{
+  "ESCでuniteを終了
+  nmap <buffer> <ESC> <Plug>(unite_exit)
+  "入力モードのときctrl+wでバックスラッシュも削除
+  imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+  "ctrl+sで縦に分割して開く
+  nnoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+  inoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+  "ctrl+vで横に分割して開く
+  nnoremap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
+  inoremap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
+  "ctrl+tで新しいタブで開く
+  nnoremap <silent> <buffer> <expr> <C-t> unite#do_action('tabopen')
+  inoremap <silent> <buffer> <expr> <C-t> unite#do_action('tabopen')
+  "ctrl+oでvimfilerで開く
+  nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('vimfiler')
+  inoremap <silent> <buffer> <expr> <C-o> unite#do_action('vimfiler')
+endfunction"}}}
+
+"End unite Scripts------------------------ }}}
+
+
+"neomru Scripts--------------------------- {{{
+" 最近開いたファイル履歴の保存数
+let g:neomru#file_mru_limit = 100
+" シンボリックリンクも対象にする
+let g:neomru#follow_links = 1
+
+"End neomru Scripts----------------------- }}}
