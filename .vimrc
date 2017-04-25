@@ -223,8 +223,18 @@ if dein#load_state(s:plugin_dir)
   call dein#add('Shougo/neosnippet-snippets')
 
   call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/neomru.vim')
-  call dein#add('Shougo/vimfiler.vim')
+  call dein#add('Shougo/vimfiler.vim', {'depends' : 'Shougo/unite.vim'})
+  call dein#add('Shougo/neomru.vim', {'depends' : 'Shougo/unite.vim'})
+  call dein#add('Shougo/unite-outline', {'depends' : 'Shougo/unite.vim'})
+
+  call dein#add('Shougo/vimproc.vim', {
+        \ 'build': {
+        \     'mac': 'make -f make_mac.mak',
+        \     'linux': 'make',
+        \     'unix': 'gmake',
+        \    },
+        \ })
+
 
   " colorscheme
   call dein#add('altercation/vim-colors-solarized')
@@ -270,6 +280,9 @@ let g:vimfiler_as_default_explorer = 1
 nnoremap [unite] <Nop>
 nmap <Space>j [unite]
 
+" uniteの設定用ディレクトリ
+let g:unite_data_directory = expand('~/.cache/unite')
+
 " 現在開いているファイルのディレクトリ下のファイル一覧。
 " 開いていない場合はカレントディレクトリ
 nnoremap <silent> [unite]j :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
@@ -281,6 +294,10 @@ nnoremap <silent> [unite]h :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]f :<C-u>Unite bookmark<CR>
 " ブックマークに追加
 nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
+" アウトライン
+nnoremap <silent> [unite]o :<C-u>Unite -buffer-name=outline outline -no-quit -vertical -winwidth=40<CR>
+" grep
+nnoremap <silent> [unite]/ :<C-u>Unite grep -no-quit<CR>
 
 "uniteを開いている間のキーマッピング
 autocmd FileType unite call s:unite_my_settings()
