@@ -203,11 +203,11 @@ nnoremap <Esc><Esc>  :<C-u>nohlsearch<CR><Esc>
 "=============================================================================
 " Commands {{{
 
-command! Vivimrc  :edit $MYVIMRC
-command! Vigvimrc  :edit $MYGVIMRC
+command! Vivimrc  edit $MYVIMRC
+command! Vigvimrc edit $MYGVIMRC
 
-command! Reloadvimrc  :<C-u>source $MYVIMRC \| if has('gui_running') \| source $MYGVIMRC \| endif <CR>
-command! Reloadgvimrc  :<C-u>source $MYGVIMRC<CR>
+command! Reloadvimrc  source $MYVIMRC | if has('gui_running') | source $MYGVIMRC | endif
+command! Reloadgvimrc source $MYGVIMRC
 "}}}
 
 "=============================================================================
