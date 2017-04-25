@@ -137,6 +137,23 @@ set swapfile
 " スワップファイル用ディレクトリ
 set directory=$MYVIMRUNTIME/tmp
 
+"------------------------------------------------------------------------------
+" 全角スペースの表示
+" http://inari.hatenablog.com/entry/2014/05/05/231307
+"
+function! IdeographicSpace()
+    highlight IdeographicSpace cterm=underline ctermfg=lightblue guibg=darkgray
+endfunction
+
+if has('syntax')
+    augroup IdeographicSpace
+        autocmd!
+        autocmd ColorScheme * call IdeographicSpace()
+        autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('IdeographicSpace', '　')
+    augroup END
+    call IdeographicSpace()
+endif
+
 "===========================================================================
 " Mappings
 "===========================================================================
