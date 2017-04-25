@@ -255,6 +255,7 @@ if dein#load_state(s:plugin_dir)
         \    },
         \ })
 
+  call dein#add('Lokaltog/vim-easymotion')
 
   " colorscheme
   call dein#add('altercation/vim-colors-solarized')
@@ -348,5 +349,25 @@ endfunction"}}}
 let g:neomru#file_mru_limit = 100
 " シンボリックリンクも対象にする
 let g:neomru#follow_links = 1
+"}}}
+
+"-----------------------------------------------------------------------------
+" easymotion {{{
+" http://haya14busa.com/mastering-vim-easymotion/
+
+" デフォルトマッピングを無効化
+let g:EasyMotion_do_mapping = 0
+" Enter／Space で1つ目のマッチ(g:EasyMotion_keys の最初の文字)に移動
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+" smartcase で検索
+let g:EasyMotion_smartcase = 1
+
+" 2-key Find Motion
+map <Space>f <Plug>(easymotion-s2)
+" n-key Find Motion
+nmap <Space>/ <Plug>(easymotion-sn)
+xmap <Space>/ <Plug>(easymotion-sn)
+omap <Space>/ <Plug>(easymotion-tn)
 "}}}
 "}}}
