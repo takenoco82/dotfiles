@@ -50,7 +50,11 @@ if has('autocmd')
       let &fileencoding=&encoding
     endif
   endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
+
+  augroup ReCheckFileEncoding
+    autocmd!
+    autocmd BufReadPost * call AU_ReCheck_FENC()
+  augroup END
 endif
 set fileformats=dos,unix,mac
 if exists('&ambiwidth')
@@ -274,7 +278,7 @@ filetype plugin indent on
 " カラースキーマ の設定
 syntax enable
 set background=dark
-augroup load_colorscheme
+augroup LoadColorscheme
   autocmd!
   autocmd VimEnter * nested colorscheme solarized
 augroup END
@@ -321,7 +325,10 @@ nnoremap <silent> [unite]o :<C-u>Unite -buffer-name=outline outline -no-quit -ve
 nnoremap <silent> [unite]/ :<C-u>Unite grep -no-quit<CR>
 
 "uniteを開いている間のキーマッピング
-autocmd FileType unite call s:unite_my_settings()
+augroup UniteSettings
+  autocmd!
+  autocmd FileType unite call s:unite_my_settings()
+augroup END
 function! s:unite_my_settings()"{{{
   "ESCでuniteを終了
   nmap <buffer> <ESC> <Plug>(unite_exit)
