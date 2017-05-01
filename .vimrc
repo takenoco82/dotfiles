@@ -94,6 +94,10 @@ set showcmd
 set wildmenu
 " タイトルを表示
 set title
+" 折り返された行をインデントして表示する
+set breakindent
+" カーソル行を強調表示する
+set cursorline
 " 縦分割するときに新しいウィンドウを右に開く
 set splitright
 " 横分割するときに新しいウィンドウを下に開く
