@@ -62,7 +62,7 @@ set hlsearch
 set tabstop=4
 " タブをスペースに展開しない
 set noexpandtab
-" 自動的にインデントする
+" 改行時に新しい行のインデントを前行のインデントと同じにする
 set autoindent
 " バックスペースでインデントや改行を削除できるようにする
 set backspace=indent,eol,start
@@ -81,7 +81,7 @@ set nrformats=alpha,hex
 "-----------------------------------------------------------------------------
 " GUI固有ではない画面表示の設定:
 "
-" 行番号を非表示
+" 行番号を表示
 set number
 " ルーラーを表示
 set ruler
