@@ -132,6 +132,11 @@ endif
 "=============================================================================
 " Mappings {{{
 
+" :helpを3倍の速度で引く
+" http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation
+nnoremap <C-h>  :<C-u>Vhelp<Space>
+nnoremap g<C-h>  :<C-u>helpgrep<Space>
+
 " j,k は論理行で移動
 nnoremap j  gj
 nnoremap k  gk
@@ -203,6 +208,11 @@ command! Format2Dos   setlocal fileformat=dos
 command! Format2Unix  setlocal fileformat=unix
 command! Format2Mac   setlocal fileformat=mac
 
+" Vim の help を右側で開いたり、タブで開いたりする
+" http://haya14busa.com/reading-vim-help/
+command! -complete=help -nargs=? Vhelp  vertical belowright help <args>
+command! -complete=help -nargs=? Tabhelp  tab help <args>
+
 "}}}
 
 "=============================================================================
@@ -253,6 +263,8 @@ if dein#load_state(s:plugin_dir)
         \     'unix': 'gmake',
         \    },
         \ })
+
+  call dein#add('thinca/vim-ft-help_fold', {'on_ft' : 'help'})
 
   call dein#add('Lokaltog/vim-easymotion')
 
@@ -373,3 +385,33 @@ xmap <Space>/ <Plug>(easymotion-sn)
 omap <Space>/ <Plug>(easymotion-tn)
 "}}}
 "}}}
+
+"=============================================================================
+" Filetypes {{{
+
+" help
+augroup HelpSettings
+  autocmd!
+  " q で help を閉じる
+  autocmd FileType help  nnoremap <buffer> q <C-w>c
+augroup END
+
+"}}}
+
+"=============================================================================
+" Autocommands {{{
+
+" hlepgrep で quickfix を自動で開く
+function! s:AutoQuickfix()
+  if empty(getqflist())
+    redraw
+  else
+    copen
+  endif
+endfunction
+augroup OpenQuickfix
+  autocmd!
+  autocmd QuickfixCmdPost helpgrep  call <SID>AutoQuickfix()
+augroup END
+"}}}
+
