@@ -78,10 +78,10 @@ set foldmethod=marker
 set number
 " ルーラーを表示
 set ruler
-" タブや改行を表示
+" 不可視文字(タブや行末、スペースなど)を表示
 set list
-" どの文字でタブや改行を表示するかを設定
-set listchars=tab:>-,extends:<,trail:-,eol:<
+" 不可視文字の表示設定
+set listchars=tab:>-,trail:-,extends:<,nbsp:.
 " 長い行を折り返して表示
 set wrap
 " 常にステータス行を表示
