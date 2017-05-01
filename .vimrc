@@ -72,6 +72,9 @@ set showmatch
 set foldmethod=marker
 " 行頭行末で前／次行に移動できるキー
 set whichwrap=b,s,h,l
+" % で日本語のカッコもジャンプできるようにする
+set matchpairs&
+set matchpairs+=（:）,「:」,『:』,【:】
 
 "-----------------------------------------------------------------------------
 " GUI固有ではない画面表示の設定:
