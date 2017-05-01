@@ -441,3 +441,4 @@ augroup OpenQuickfix
 augroup END
 "}}}
 
+" vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
