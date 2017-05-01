@@ -196,6 +196,9 @@ nnoremap <silent> go  :<C-u>call append(expand('.'), '')<CR>j
 
 " 検索結果ハイライトを消す
 nnoremap <Esc><Esc>  :<C-u>nohlsearch<CR><Esc>
+
+" スクラッチバッファを作成する
+nnoremap <C-s>  :<C-u>Scratch<CR>
 "}}}
 
 "=============================================================================
