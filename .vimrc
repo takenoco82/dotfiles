@@ -72,6 +72,10 @@ set showmatch
 set foldmethod=marker
 " 行頭行末で前／次行に移動できるキー
 set whichwrap=b,s,h,l
+" diffモード時のオプション
+"   filter: 片方だけに存在する行がある場合、行の存在しないウィンドウの方に埋め立て用の行を表示する
+"   vertical: 明示的に指定されない限り、縦分割して表示する
+set diffopt=filler,vertical
 " % で日本語のカッコもジャンプできるようにする
 set matchpairs&
 set matchpairs+=（:）,「:」,『:』,【:】
@@ -234,7 +238,11 @@ command! Format2Dos   setlocal fileformat=dos
 command! Format2Unix  setlocal fileformat=unix
 command! Format2Mac   setlocal fileformat=mac
 
-" Vim の help を右側で開いたり、タブで開いたりする
+" 現在のバッファと元のファイルの差分を見る
+command! DiffOrig  vert new | set bt=nofile | r ++edit # | 0d_
+  \ | diffthis | wincmd p | diffthis
+
+" Vim のヘルプを右側で開いたり、タブで開いたりする
 " http://haya14busa.com/reading-vim-help/
 command! -complete=help -nargs=? Vhelp  vertical belowright help <args>
 command! -complete=help -nargs=? Tabhelp  tab help <args>
