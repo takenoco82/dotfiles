@@ -1,14 +1,23 @@
 "=============================================================================
 " Basic {{{
 
-set nocompatible " to use many extensions of Vim.
+" Anti-pattern of vimrc
+" http://rbtnn.hateblo.jp/entry/2014/11/30/174749
+
+" the character encoding used inside Vim
+set encoding=utf-8
+
+" the character encoding used in this script.
+scriptencoding utf-8
+
+" autocmd はグループ MyVimrc に所属させる
+augroup MyVimrc
+  autocmd!
+augroup END
 "}}}
 
 "=============================================================================
 " Encoding {{{
-
-" Vim内部で使われる文字エンコーディング
-set encoding=utf-8
 
 " 文字コードの判定
 if has('iconv')
@@ -22,7 +31,7 @@ if has('autocmd')
       let &fileencoding=&encoding
     endif
   endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
+  autocmd MyVimrc BufReadPost *  call AU_ReCheck_FENC()
 endif
 
 " 改行コードの判定
@@ -143,16 +152,13 @@ set directory=$MYVIMRUNTIME/tmp
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 "
 function! IdeographicSpace()
-    highlight IdeographicSpace cterm=underline ctermfg=lightblue guibg=darkgray
+  highlight IdeographicSpace cterm=underline ctermfg=lightblue guibg=darkgray
 endfunction
 
 if has('syntax')
-    augroup IdeographicSpace
-        autocmd!
-        autocmd ColorScheme * call IdeographicSpace()
-        autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('IdeographicSpace', '　')
-    augroup END
-    call IdeographicSpace()
+  autocmd MyVimrc ColorScheme *  call IdeographicSpace()
+  autocmd MyVimrc VimEnter,WinEnter,BufRead *  let w:m1=matchadd('IdeographicSpace', '　')
+  call IdeographicSpace()
 endif
 "}}}
 
@@ -319,10 +325,7 @@ filetype plugin indent on
 " カラースキーマ の設定
 syntax enable
 set background=dark
-augroup LoadColorscheme
-  autocmd!
-  autocmd VimEnter * nested colorscheme solarized
-augroup END
+autocmd MyVimrc VimEnter * nested  colorscheme solarized
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
@@ -366,10 +369,7 @@ nnoremap <silent> [unite]o :<C-u>Unite -buffer-name=outline outline -no-quit -ve
 nnoremap <silent> [unite]/ :<C-u>Unite grep -no-quit<CR>
 
 "uniteを開いている間のキーマッピング
-augroup UniteSettings
-  autocmd!
-  autocmd FileType unite call s:unite_my_settings()
-augroup END
+autocmd MyVimrc FileType unite  call s:unite_my_settings()
 function! s:unite_my_settings()"{{{
   "ESCでuniteを終了
   nmap <buffer> <ESC> <Plug>(unite_exit)
@@ -424,11 +424,8 @@ omap <Space>/ <Plug>(easymotion-tn)
 " Filetypes {{{
 
 " help
-augroup HelpSettings
-  autocmd!
-  " q で help を閉じる
-  autocmd FileType help  nnoremap <buffer> q <C-w>c
-augroup END
+" q で help を閉じる
+autocmd MyVimrc FileType help  nnoremap <buffer> q <C-w>c
 
 "}}}
 
@@ -443,10 +440,7 @@ function! s:AutoQuickfix()
     copen
   endif
 endfunction
-augroup OpenQuickfix
-  autocmd!
-  autocmd QuickfixCmdPost helpgrep  call <SID>AutoQuickfix()
-augroup END
+autocmd MyVimrc QuickfixCmdPost helpgrep  call <SID>AutoQuickfix()
 "}}}
 
 " vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
