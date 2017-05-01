@@ -70,6 +70,8 @@ set backspace=indent,eol,start
 set showmatch
 " 折り畳みの種類 (marker:マーカーで折り畳みを指定する。)
 set foldmethod=marker
+" 行頭行末で前／次行に移動できるキー
+set whichwrap=b,s,h,l
 
 "-----------------------------------------------------------------------------
 " GUI固有ではない画面表示の設定:
