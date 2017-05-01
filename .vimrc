@@ -100,10 +100,14 @@ set title
 "
 " バックアップファイルを作成しない
 set nobackup
-" アンドゥファイルを作成する
-set undofile
-" アンドゥファイル用のディレクトリ
-set undodir=$MYVIMRUNTIME/backup
+
+if has('persistent_undo')
+  " アンドゥファイルを作成する
+  set undofile
+  " アンドゥファイル用のディレクトリ
+  set undodir=$MYVIMRUNTIME/undo
+endif
+
 " スワップファイルを作成する
 set swapfile
 " スワップファイル用ディレクトリ
