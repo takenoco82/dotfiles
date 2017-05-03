@@ -90,6 +90,9 @@ set matchpairs&
 set matchpairs+=<:>,（:）,「:」,『:』,【:】
 " C-a, C-x の対象
 set nrformats=alpha,hex
+" テキスト挿入中の自動折り返しを日本語に対応させる
+set formatoptions&
+set formatoptions+=mM
 
 "-----------------------------------------------------------------------------
 " GUI固有ではない画面表示の設定:
@@ -319,6 +322,8 @@ if dein#load_state(s:plugin_dir)
   call dein#add('kana/vim-operator-user')
   call dein#add('rhysd/vim-operator-surround', {'depends' : 'kana/vim-operator-user'})
 
+  call dein#add('deton/jasegment.vim')
+
   " colorscheme
   call dein#add('altercation/vim-colors-solarized')
 
@@ -508,6 +513,12 @@ call textobj#user#plugin('jbraces', {
 " vim-textobj-anyblock {{{
 
 let g:textobj#anyblock#blocks = [ '(', '[', '{', '<', '"', "'", 'jb', 'jk', 'jd', 'js']
+"}}}
+
+"-----------------------------------------------------------------------------
+" jasegment {{{
+
+let g:jasegment#model = 'knbc_bunsetu'
 "}}}
 "}}}
 
