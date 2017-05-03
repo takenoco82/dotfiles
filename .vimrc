@@ -416,6 +416,13 @@ let g:neomru#follow_links = 1
 "}}}
 
 "-----------------------------------------------------------------------------
+" unite-outline {{{
+
+" outline info を別のファイルタイプでも利用する
+call unite#sources#outline#alias('tmux', 'conf')
+"}}}
+
+"-----------------------------------------------------------------------------
 " easymotion {{{
 " http://haya14busa.com/mastering-vim-easymotion/
 
