@@ -309,6 +309,7 @@ if dein#load_state(s:plugin_dir)
 
   call dein#add('thinca/vim-ft-help_fold', {'on_ft' : 'help'})
 
+  call dein#add('rhysd/clever-f.vim')
   call dein#add('Lokaltog/vim-easymotion')
 
   call dein#add('junegunn/vim-easy-align')
@@ -427,6 +428,17 @@ map <Space>f <Plug>(easymotion-s2)
 nmap <Space>/ <Plug>(easymotion-sn)
 xmap <Space>/ <Plug>(easymotion-sn)
 omap <Space>/ <Plug>(easymotion-tn)
+"}}}
+
+"-----------------------------------------------------------------------------
+" clever-f {{{
+
+" smartcase で検索
+let g:clever_f_smart_case = 1
+" migemo をサポートする
+let g:clever_f_use_migemo = 1
+" f と F の検索方向を固定する
+let g:clever_f_fix_key_direction = 1
 "}}}
 
 "-----------------------------------------------------------------------------
