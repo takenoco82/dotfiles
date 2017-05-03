@@ -87,7 +87,7 @@ set whichwrap=b,s,h,l
 set diffopt=filler,vertical
 " % で日本語のカッコもジャンプできるようにする
 set matchpairs&
-set matchpairs+=（:）,「:」,『:』,【:】
+set matchpairs+=<:>,（:）,「:」,『:』,【:】
 " C-a, C-x の対象
 set nrformats=alpha,hex
 
@@ -164,6 +164,9 @@ endif
 
 "=============================================================================
 " Mappings {{{
+
+" s は他の機能に割り当てるので無効にする
+noremap s <Nop>
 
 " :helpを3倍の速度で引く
 " http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation
@@ -308,6 +311,11 @@ if dein#load_state(s:plugin_dir)
 
   call dein#add('Lokaltog/vim-easymotion')
 
+  call dein#add('kana/vim-textobj-user')
+  call dein#add('rhysd/vim-textobj-anyblock', {'depends' : 'kana/vim-textobj-user'})
+  call dein#add('kana/vim-operator-user')
+  call dein#add('rhysd/vim-operator-surround', {'depends' : 'kana/vim-operator-user'})
+
   " colorscheme
   call dein#add('altercation/vim-colors-solarized')
 
@@ -417,6 +425,65 @@ map <Space>f <Plug>(easymotion-s2)
 nmap <Space>/ <Plug>(easymotion-sn)
 xmap <Space>/ <Plug>(easymotion-sn)
 omap <Space>/ <Plug>(easymotion-tn)
+"}}}
+
+"-----------------------------------------------------------------------------
+" vim-operator-surround {{{
+
+" ブロックの定義
+let g:operator#surround#blocks = {}
+" すべてファイルタイプ
+let g:operator#surround#blocks['-'] = [
+    \   { 'block' : ['(', ')'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['(', ')'] },
+    \   { 'block' : ['[', ']'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['[', ']'] },
+    \   { 'block' : ['{', '}'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['{', '}'] },
+    \   { 'block' : ['<', '>'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['<', '>'] },
+    \   { 'block' : ['"', '"'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['"'] },
+    \   { 'block' : ["'", "'"], 'motionwise' : ['char', 'line', 'block'], 'keys' : ["'"] },
+    \   { 'block' : ['（', '）'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['jb'] },
+    \   { 'block' : ['「', '」'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['jk'] },
+    \   { 'block' : ['『', '』'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['jd'] },
+    \   { 'block' : ['【', '】'], 'motionwise' : ['char', 'line', 'block'], 'keys' : ['js'] },
+    \ ]
+
+" operator mappings
+map <silent>ss <Plug>(operator-surround-append)
+map <silent>sd <Plug>(operator-surround-delete)
+map <silent>sr <Plug>(operator-surround-replace)
+
+" delete or replace most inner surround using vim-textobj-anyblock
+nmap <silent>sdd <Plug>(operator-surround-delete)<Plug>(textobj-anyblock-a)
+nmap <silent>srr <Plug>(operator-surround-replace)<Plug>(textobj-anyblock-a)
+"}}}
+
+"-----------------------------------------------------------------------------
+" vim-textobj-user {{{
+
+" http://qiita.com/murashitas/items/f2be0dda2a4498cb7985
+call textobj#user#plugin('jbraces', {
+    \   'parens': {
+    \       'pattern': ['（', '）'],
+    \       'select-a': 'ajb', 'select-i': 'ijb'
+    \  },
+    \   'kakko': {
+    \       'pattern': ['「', '」'],
+    \       'select-a': 'ajk', 'select-i': 'ijk'
+    \  },
+    \  'double-kakko': {
+    \       'pattern': ['『', '』'],
+    \       'select-a': 'ajd', 'select-i': 'ijd'
+    \  },
+    \  'sumi-kakko': {
+    \       'pattern': ['【', '】'],
+    \       'select-a': 'ajs', 'select-i': 'ijs'
+    \  },
+    \})
+"}}}
+
+"-----------------------------------------------------------------------------
+" vim-textobj-anyblock {{{
+
+let g:textobj#anyblock#blocks = [ '(', '[', '{', '<', '"', "'", 'jb', 'jk', 'jd', 'js']
 "}}}
 "}}}
 
