@@ -311,6 +311,8 @@ if dein#load_state(s:plugin_dir)
 
   call dein#add('Lokaltog/vim-easymotion')
 
+  call dein#add('junegunn/vim-easy-align')
+
   call dein#add('kana/vim-textobj-user')
   call dein#add('rhysd/vim-textobj-anyblock', {'depends' : 'kana/vim-textobj-user'})
   call dein#add('kana/vim-operator-user')
@@ -425,6 +427,16 @@ map <Space>f <Plug>(easymotion-s2)
 nmap <Space>/ <Plug>(easymotion-sn)
 xmap <Space>/ <Plug>(easymotion-sn)
 omap <Space>/ <Plug>(easymotion-tn)
+"}}}
+
+"-----------------------------------------------------------------------------
+" easy-align {{{
+
+" https://github.com/junegunn/vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 "}}}
 
 "-----------------------------------------------------------------------------
