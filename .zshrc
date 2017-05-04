@@ -108,6 +108,8 @@ setopt IGNORE_EOF
 setopt INTERACTIVE_COMMENTS
 # 日本語ファイル名を表示可能にする(既に問題ない場合には必要ない)
 #setopt PRINT_EIGHT_BIT
+# 正常終了しなかった場合に終了コード($?)を表示する
+setopt PRINT_EXIT_VALUE
 #}}}
 
 #}}}
