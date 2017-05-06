@@ -151,6 +151,14 @@ set swapfile
 set directory=$MYVIMRUNTIME/tmp
 
 "-----------------------------------------------------------------------------
+" 端末オプション
+
+  " 256色ターミナルに対応する
+if !has('gui_running')
+  set t_Co=256
+endif
+
+"-----------------------------------------------------------------------------
 " 全角スペースの表示
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 "
@@ -323,6 +331,8 @@ if dein#load_state(s:plugin_dir)
   call dein#add('rhysd/vim-operator-surround', {'depends' : 'kana/vim-operator-user'})
 
   call dein#add('deton/jasegment.vim')
+
+  call dein#add('itchyny/lightline.vim')
 
   " colorscheme
   call dein#add('altercation/vim-colors-solarized')
@@ -526,6 +536,14 @@ let g:textobj#anyblock#blocks = [ '(', '[', '{', '<', '"', "'", 'jb', 'jk', 'jd'
 " jasegment {{{
 
 let g:jasegment#model = 'knbc_bunsetu'
+"}}}
+
+"-----------------------------------------------------------------------------
+" lightline {{{
+
+let g:lightline = {
+  \ 'colorscheme': 'solarized'
+  \ }
 "}}}
 "}}}
 
