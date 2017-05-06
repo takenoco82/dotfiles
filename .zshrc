@@ -138,4 +138,24 @@ function showoptions() {
 }
 #}}}
 
+#=============================================================================
+# Otherwize {{{
+
+#-----------------------------------------------------------------------------
+# Zsh起動時にtmuxを起動 {{{
+# http://pirosikick.hateblo.jp/entry/2014/03/04/100310
+
+# 既にtmuxを起動してないか
+if [ "$TMUX" = "" ]; then
+    tmux attach;
+
+    # detachしてない場合
+    if [ $? ]; then
+        tmux;
+    fi
+fi
+#}}}
+
+#}}}
+
 # vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
