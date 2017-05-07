@@ -542,10 +542,104 @@ let g:jasegment#model = 'knbc_bunsetu'
 
 "-----------------------------------------------------------------------------
 " lightline {{{
+" # http://itchyny.hatenablog.com/entry/20130828/1377653592
+" # https://github.com/itchyny/lightline.vim/blob/master/README.md
 
 let g:lightline = {
-  \ 'colorscheme': 'solarized'
+  \ 'colorscheme': 'solarized',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'modified':     'LightlineModified',
+  \   'readonly':     'LightlineReadonly',
+  \   'fugitive':     'LightlineFugitive',
+  \   'filename':     'LightlineFilename',
+  \   'fileformat':   'LightlineFileformat',
+  \   'filetype':     'LightlineFiletype',
+  \   'fileencoding': 'LightlineFileencoding',
+  \   'mode':         'LightlineMode',
+  \ },
   \ }
+
+" help, vimfiler, unite では非表示にする
+function! LightlineModified() "{{{
+  if &filetype =~ 'help\|vimfiler\|unite'
+    return ''
+  elseif &modified
+    return '+'
+  elseif &modifiable
+    return ''
+  endif
+  return '-'
+endfunction "}}}
+
+" help, vimfiler では RO(読み取り専用) を非表示にする
+function! LightlineReadonly() "{{{
+  if &filetype !~? 'help\|vimfiler' && &readonly
+    return '[RO]'
+  endif
+  return ''
+endfunction "}}}
+
+" Gitブランチが表示できれば表示する
+function! LightlineFugitive() "{{{
+  if &filetype !~? 'vimfiler' && exists('*fugitive#head')
+    return fugitive#head()
+  else
+    return ''
+  endif
+endfunction "}}}
+
+" vimfiler, unite, vimshell でカッコよく表示する
+function! LightlineFilename() "{{{
+  let s:read_only = '' != LightlineReadonly() ? LightlineReadonly() . ' ' : ''
+
+  if &filetype == 'vimfiler'
+    let s:file_name = vimfiler#get_status_string()
+  elseif &filetype == 'unite'
+    let s:file_name = unite#get_status_string()
+  elseif &filetype == 'vimshell'
+    let s:file_name = vimshell#get_status_string()
+  elseif '' == expand('%:t')
+    let s:file_name = '[No Name]'
+  else
+    let s:file_name = expand('%:t')
+  endif
+
+  return s:read_only . s:file_name
+endfunction "}}}
+
+" ウィンドウ幅が狭いときは fileformat, filetype, fileencoding, mode を非表示にする
+function! LightlineFileformat() "{{{
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction "}}}
+
+function! LightlineFiletype() "{{{
+  if winwidth(0) > 70
+    if &filetype ==# ''
+      return 'no ft'
+    endif
+    return &filetype
+  endif
+  return ''
+endfunction "}}}
+
+function! LightlineFileencoding() "{{{
+  if winwidth(0) > 70
+    if &fileencoding ==# ''
+      return &encoding
+    endif
+    return &fileencoding
+  endif
+  return ''
+endfunction "}}}
+
+function! LightlineMode() "{{{
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction "}}}
+
 "}}}
 "}}}
 
