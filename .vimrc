@@ -334,6 +334,8 @@ if dein#load_state(s:plugin_dir)
 
   call dein#add('itchyny/lightline.vim')
 
+  call dein#add('tpope/vim-fugitive')
+
   " colorscheme
   call dein#add('altercation/vim-colors-solarized')
 
