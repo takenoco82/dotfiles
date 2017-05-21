@@ -373,32 +373,50 @@ let g:vimfiler_as_default_explorer = 1
 " http://www.karakaram.com/unite
 " http://d.hatena.ne.jp/osyo-manga/20130307/1362621589
 
+" uniteの設定用ディレクトリ
+let g:unite_data_directory = expand('~/.cache/unite')
+
+" file_rec/async, file_rec/git の検索対象外
+" https://blog.sasaplus1.com/2015/03/29/01/
+let s:unite_ignore_file_rec_patterns = '\v'
+      \ . '\.bash_sessions/|\.cache/|\.dvdcss/|\.Trash/|'
+      \ . '\.vim/(backup|undo)/|'
+      \ . '\.DS_Store$'
+call unite#custom#source(
+      \ 'file_rec/async,file_rec/git',
+      \ 'ignore_pattern',
+      \ s:unite_ignore_file_rec_patterns)
+
+" unite-file でドットファイルを表示する
+" http://d.hatena.ne.jp/osyo-manga/20140728/1406559669
+call unite#custom#source('file', 'matchers', "matcher_default")
+
 " プレフィックスキー
 nnoremap [unite] <Nop>
 nmap <Space>j [unite]
 
-" uniteの設定用ディレクトリ
-let g:unite_data_directory = expand('~/.cache/unite')
-
-" 現在開いているファイルのディレクトリ下のファイル一覧。
-" 開いていない場合はカレントディレクトリ
-nnoremap <silent> [unite]j :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" 現在開いているファイルのディレクトリ下のファイル一覧。開いていない場合はカレントディレクトリ
+nnoremap <silent> [unite]e :<C-u>UniteWithBufferDir -buffer-name=files -start-insert file<CR>
 " バッファ一覧
-nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]b :<C-u>Unite buffer -start-insert<CR>
 " 最近使用したファイル一覧
-nnoremap <silent> [unite]h :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]h :<C-u>Unite file_mru -start-insert<CR>
 " ブックマーク一覧
-nnoremap <silent> [unite]f :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]m :<C-u>Unite bookmark -start-insert<CR>
 " ブックマークに追加
 nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 " アウトライン
 nnoremap <silent> [unite]o :<C-u>Unite -buffer-name=outline outline -no-quit -vertical -winwidth=40<CR>
+" grep (カレントバッファ)
+nnoremap <silent> [unite]/ :<C-u>Unite grep:% -no-quit -start-insert<CR>
 " grep
-nnoremap <silent> [unite]/ :<C-u>Unite grep -no-quit<CR>
+nnoremap <silent> [unite]g :<C-u>Unite grep -no-quit -start-insert<CR>
+" 非同期でファイル検索
+nnoremap <silent> [unite]f :<C-u>Unite file_rec/async -start-insert<CR>
 
 "uniteを開いている間のキーマッピング
 autocmd MyVimrc FileType unite  call s:unite_my_settings()
-function! s:unite_my_settings()"{{{
+function! s:unite_my_settings() "{{{
   "ESCでuniteを終了
   nmap <buffer> <ESC> <Plug>(unite_exit)
   "入力モードのときctrl+wでバックスラッシュも削除
@@ -415,7 +433,8 @@ function! s:unite_my_settings()"{{{
   "ctrl+oでvimfilerで開く
   nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('vimfiler')
   inoremap <silent> <buffer> <expr> <C-o> unite#do_action('vimfiler')
-endfunction"}}}
+endfunction "}}}
+
 "}}}
 
 "-----------------------------------------------------------------------------
