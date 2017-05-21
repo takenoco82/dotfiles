@@ -621,6 +621,8 @@ function! LightlineFilename() "{{{
     let s:file_name = unite#get_status_string()
   elseif &filetype == 'vimshell'
     let s:file_name = vimshell#get_status_string()
+  elseif &buftype == 'nofile'
+    let s:file_name = '[Scratch]'
   elseif '' == expand('%:t')
     let s:file_name = '[No Name]'
   else
