@@ -339,6 +339,9 @@ if dein#load_state(s:plugin_dir)
   " colorscheme
   call dein#add('altercation/vim-colors-solarized')
 
+  " syntax
+  call dein#add('PProvost/vim-ps1')
+
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
@@ -670,6 +673,9 @@ endfunction "}}}
 " help
 " q で help を閉じる
 autocmd MyVimrc FileType help  nnoremap <buffer> q <C-w>c
+
+" PowerShell
+autocmd MyVimrc BufNewFile,BufRead *.ps1,*psm1  setlocal expandtab softtabstop=4 shiftwidth=4
 
 "}}}
 
