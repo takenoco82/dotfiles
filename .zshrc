@@ -23,6 +23,11 @@ export LANG=ja_JP.UTF-8
 # 標準エディタを設定する
 export EDITOR=vim
 
+# pyenvを使えるようにする
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+eval "$(pyenv init -)"
+
 #-----------------------------------------------------------------------------
 # ヒストリの設定 {{{
 
