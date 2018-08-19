@@ -5,6 +5,12 @@
 autoload -Uz colors
 colors
 
+# Docker関連コマンドの補完を行う
+# https://chopschips.net/blog/2018/04/17/docker-completion/
+if [ -e ~/.zsh/completions ]; then
+  fpath=(~/.zsh/completions $fpath)
+fi
+
 # 自動補完を有効にする
 autoload -Uz compinit
 compinit
