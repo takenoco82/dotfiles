@@ -1,0 +1,21 @@
+[core]
+    excludesfile = ~/.gitignore_global
+[color]
+    ui = auto
+[include]
+    path = ~/.gitconfig.local
+[difftool "sourcetree"]
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path =
+[mergetool "sourcetree"]
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
+[commit]
+    template = ~/.stCommitMsg
+[http]
+    sslVerify = false
+[alias]
+    st = status
+    cm = commit
+    co = checkout
+    br = branch
