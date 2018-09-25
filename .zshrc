@@ -93,6 +93,8 @@ setopt AUTO_PARAM_SLASH
 setopt LIST_PACKED
 # ファイルの末尾に種別の識別記号をつける
 setopt LIST_TYPES
+# 大文字を入力した時は小文字の候補を補完しない
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 #}}}
 
 #-----------------------------------------------------------------------------
