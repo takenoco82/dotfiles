@@ -47,6 +47,10 @@ eval "$(pipenv --completion)"
 # nodebrewを使えるようにする
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
+# Goのパスを通す
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
 #-----------------------------------------------------------------------------
 # ヒストリの設定 {{{
 
