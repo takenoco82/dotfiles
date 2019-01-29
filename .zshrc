@@ -102,6 +102,12 @@ setopt LIST_PACKED
 setopt LIST_TYPES
 # 大文字を入力した時は小文字の候補を補完しない
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+# aws-cliの補完を行う
+# https://qiita.com/mojito/items/5e0181615e48d3e6109e
+if [ -e ~/.pyenv/shims/aws_completer ]; then
+  source "$(pyenv which aws_zsh_completer.sh)"
+fi
+
 #}}}
 
 #-----------------------------------------------------------------------------
