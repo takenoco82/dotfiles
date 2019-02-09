@@ -6,6 +6,7 @@ ln -sf ~/git/dotfiles/.gvimrc ~/.gvimrc
 ln -sf ~/git/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/git/dotfiles/.gitconfig ~/.gitconfig
 ln -sf ~/git/dotfiles/.gitignore_global ~/.gitignore_global
+ln -sf ~/git/dotfiles/.myclirc ~/.myclirc
 
 zsh_comp_dir=~/.zsh/completions
 zsh_completion=/Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion
