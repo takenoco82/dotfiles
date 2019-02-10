@@ -356,7 +356,7 @@ filetype plugin indent on
 " カラースキーマ の設定
 syntax enable
 set background=dark
-autocmd MyVimrc VimEnter * nested  colorscheme solarized
+autocmd MyVimrc VimEnter * nested  colorscheme default
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
