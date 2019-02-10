@@ -184,22 +184,14 @@ function showoptions() {
 #-----------------------------------------------------------------------------
 # プロンプト {{{
 
-# ユーザー名@ホスト名
-PROMPT='%n@%m %# '
-# ディレクトリ
-RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
-# gitのブランチ名をステータスに応じて色付き表示する
-# http://tkengo.github.io/blog/2013/05/12/zsh-vcs-info/
-setopt prompt_subst
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
-RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+# Pure (https://github.com/sindresorhus/pure)
+autoload -U promptinit; promptinit
+prompt pure
 #}}}
 
 #}}}
 
 # vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
+
+# added by travis gem
+[ -f /Users/daisuke_takeuchi/.travis/travis.sh ] && source /Users/daisuke_takeuchi/.travis/travis.sh
