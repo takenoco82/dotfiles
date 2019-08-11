@@ -47,6 +47,8 @@ eval "$(pyenv init -)"
 
 # pipenvを使えるようにする
 eval "$(pipenv --completion)"
+# .venv をプロジェクト内に作成する
+export PIPENV_VENV_IN_PROJECT=1
 
 # nodebrewを使えるようにする
 export PATH=$HOME/.nodebrew/current/bin:$PATH
