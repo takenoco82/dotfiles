@@ -1,5 +1,5 @@
 #=============================================================================
-# Autoloads {{{
+# Autoloads
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -17,10 +17,10 @@ compinit
 
 # リポジトリ情報を取得する
 autoload -Uz vcs_info
-#}}}
+
 
 #=============================================================================
-# Key Bindings {{{
+# Key Bindings
 
 # emacsモードを使う
 bindkey -e
@@ -28,10 +28,9 @@ bindkey -e
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 
-#}}}
 
 #=============================================================================
-# Environment Variables {{{
+# Environment Variables
 # https://wiki.archlinuxjp.org/index.php/Zsh
 #
 # 文字コード
@@ -61,7 +60,7 @@ export PATH=$PATH:$GOPATH/bin
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 #-----------------------------------------------------------------------------
-# ヒストリの設定 {{{
+# ヒストリの設定
 
 # 履歴ファイルの保存先
 export HISTFILE=~/.zsh_history
@@ -69,24 +68,22 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=1000
 # HISTFILE で指定したファイルに保存される履歴の件数
 export SAVEHIST=1000
-#}}}
 
 #-----------------------------------------------------------------------------
-# ls コマンドのカラー表示 {{{
+# ls コマンドのカラー表示
 # http://post.simplie.jp/posts/60
 export CLICOLOR=true
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
-#}}}
-#}}}
+
 
 #=============================================================================
-# Options {{{
+# Options
 # http://zsh.sourceforge.net/Doc/Release/Options.html
 # http://news.mynavi.jp/column/zsh/005/
 
 #-----------------------------------------------------------------------------
-# Changing Directories {{{
+# Changing Directories
 
 # ディレクトリ名だけで cd する
 setopt AUTO_CD
@@ -94,10 +91,9 @@ setopt AUTO_CD
 setopt AUTO_PUSHD
 # 同じディレクトリを重複して pushd しない
 setopt PUSHD_IGNORE_DUPS
-#}}}
 
 #-----------------------------------------------------------------------------
-# Completion {{{
+# Completion
 
 # 補完候補を一覧で表示する
 setopt AUTO_LIST
@@ -117,14 +113,11 @@ if [ -e ~/.pyenv/shims/aws_completer ]; then
   source "$(pyenv which aws_zsh_completer.sh)"
 fi
 
-#}}}
+#-----------------------------------------------------------------------------
+# Expansion and Globbing
 
 #-----------------------------------------------------------------------------
-# Expansion and Globbing {{{
-#}}}
-
-#-----------------------------------------------------------------------------
-# History {{{
+# History
 
 # 同じコマンドは履歴に保存しない(古い履歴を削除する)
 setopt HIST_IGNORE_ALL_DUPS
@@ -136,10 +129,9 @@ setopt HIST_NO_STORE
 setopt INC_APPEND_HISTORY
 # 履歴を共有する
 setopt SHARE_HISTORY
-#}}}
 
 #-----------------------------------------------------------------------------
-# Input/Output {{{
+# Input/Output
 
 # コマンドのスペルミスを指摘する
 setopt CORRECT
@@ -155,12 +147,10 @@ setopt INTERACTIVE_COMMENTS
 #setopt PRINT_EIGHT_BIT
 # 正常終了しなかった場合に終了コード($?)を表示する
 setopt PRINT_EXIT_VALUE
-#}}}
 
-#}}}
 
 #=============================================================================
-# Aliases {{{
+# Aliases
 
 alias ls="ls -FG"
 alias la="ls -FGa"
@@ -175,32 +165,28 @@ if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
   alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
   alias vi=vim
 fi
-#}}}
+
 
 #=============================================================================
-# Functions {{{
+# Functions
 
 # オプション一覧を表示する
 # http://qiita.com/mollifier/items/26c67347734f9fcda274
 function showoptions() {
   set -o | sed -e 's/^no\(.*\)on$/\1  off/' -e 's/^no\(.*\)off$/\1  on/'
 }
-#}}}
+
 
 #=============================================================================
-# Otherwize {{{
+# Otherwize
 
 #-----------------------------------------------------------------------------
-# プロンプト {{{
+# プロンプト
 
 # Pure (https://github.com/sindresorhus/pure)
 autoload -U promptinit; promptinit
 prompt pure
-#}}}
 
-#}}}
-
-# vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
 
 # added by travis gem
 [ -f /Users/daisuke_takeuchi/.travis/travis.sh ] && source /Users/daisuke_takeuchi/.travis/travis.sh
