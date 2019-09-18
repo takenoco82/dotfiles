@@ -180,13 +180,12 @@ function showoptions() {
 #=============================================================================
 # Otherwize
 
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
 #-----------------------------------------------------------------------------
 # プロンプト
 
 # Pure (https://github.com/sindresorhus/pure)
 autoload -U promptinit; promptinit
 prompt pure
-
-
-# added by travis gem
-[ -f /Users/daisuke_takeuchi/.travis/travis.sh ] && source /Users/daisuke_takeuchi/.travis/travis.sh
