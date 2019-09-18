@@ -18,3 +18,13 @@ fi
 if [ -e $docker_compose_zsh_completion ]; then
     ln -sf $docker_compose_zsh_completion $zsh_comp_dir/_docker-compose
 fi
+
+# install starship
+starship --version > /dev/null
+if [[ $? -ne 0 ]]; then
+  brew install starship
+fi
+
+config_dir=~/.config
+mkdir -p $config_dir
+ln -sf ~/git/dotfiles/.config/starship.toml ~/.config/starship.toml

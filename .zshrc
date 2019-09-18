@@ -186,6 +186,6 @@ function showoptions() {
 #-----------------------------------------------------------------------------
 # プロンプト
 
-# Pure (https://github.com/sindresorhus/pure)
-autoload -U promptinit; promptinit
-prompt pure
+# Starship
+# https://github.com/starship/starship
+eval "$(starship init zsh)"
