@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -eu
+
 ############################################################
 # Dock
 ############################################################
@@ -6,6 +10,8 @@
 defaults write com.apple.dock autohide -bool true
 # Set the icon size
 defaults write com.apple.dock tilesize -int 40
+# Position
+defaults write com.apple.dock orientation -string "right"
 
 ############################################################
 # Finder
@@ -20,6 +26,12 @@ defaults write com.apple.finder ShowStatusBar -bool true
 # Show Tab bar
 defaults write com.apple.finder ShowTabView -bool true
 
+# 隠しファイルを表示する
+defaults write com.apple.finder AppleShowAllFiles -boolean true
+
+# 拡張子を常に表示
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
 # Show the ~/Library directory
 chflags nohidden ~/Library
 
@@ -33,4 +45,42 @@ defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 ############################################################
 # Date & Time
 ############################################################
+
+# Format
 defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
+
+############################################################
+# Security & Privacy
+############################################################
+
+# ファイアーウォールをオンにする
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+
+############################################################
+# Keyboard
+############################################################
+
+# Use F1, F2 etc. keys as standard function keys
+defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
+
+############################################################
+# Trackpad
+############################################################
+
+# Tap to click
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+# Enable Three finger drag
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+
+############################################################
+# Other
+############################################################
+
+# 共有フォルダで .DS_Store ファイルを作成しない
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+
+
+killall Dock
+killall Finder
+killall SystemUIServer
