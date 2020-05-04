@@ -1,0 +1,13 @@
+[core]
+    excludesfile = ~/.gitignore_global
+[color]
+    ui = auto
+[include]
+    path = ~/.gitconfig.local
+[http]
+    sslVerify = false
+[alias]
+    st = status
+    cm = commit
+    co = checkout
+    br = branch

@@ -1,0 +1,36 @@
+############################################################
+# Dock
+############################################################
+
+# Automatically hide
+defaults write com.apple.dock autohide -bool true
+# Set the icon size
+defaults write com.apple.dock tilesize -int 40
+
+############################################################
+# Finder
+############################################################
+
+# Show Path bar
+defaults write com.apple.finder ShowPathbar -bool true
+# Show Side bar
+defaults write com.apple.finder ShowSidebar -bool true
+# Show Status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+# Show Tab bar
+defaults write com.apple.finder ShowTabView -bool true
+
+# Show the ~/Library directory
+chflags nohidden ~/Library
+
+############################################################
+# Battery
+############################################################
+
+# Show the battery percentage
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"
+
+############################################################
+# Date & Time
+############################################################
+defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
