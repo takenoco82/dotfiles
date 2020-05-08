@@ -152,9 +152,9 @@ alias la="ls -FGa"
 alias ll="ls -FGla"
 alias lt="ls -FGlat"
 alias mkdir="mkdir -p"
-alias rm="rm -i"
-alias mv="mv -i"
-alias cp="cp -i"
+# alias rm="rm -i"
+# alias mv="mv -i"
+# alias cp="cp -i"
 
 if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
   alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
