@@ -146,9 +146,9 @@ function install_packages() {
   brew cask install vlc
   brew cask install webex-meetings
 
-  mas instal 568494494  # Pocket
-  mas instal 803453959  # Slack
-  mas instal 1278508951  # Trello
+  mas install 568494494  # Pocket
+  mas install 803453959  # Slack
+  mas install 1278508951  # Trello
 
   echo "Instaling Packages completed successfully"
 }
