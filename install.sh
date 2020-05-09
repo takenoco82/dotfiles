@@ -61,7 +61,7 @@ function setup() {
 
   case "$platform" in
     "Darwin" )
-      . "$SCRIPT_DIR"/setup/macos.sh
+      sh "$SCRIPT_DIR"/setup/macos.sh
       ;;
     * )
       echo "$platform: unsupported platform!"
