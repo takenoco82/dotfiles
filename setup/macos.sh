@@ -22,9 +22,15 @@ function setup_dock() {
   defaults write com.apple.dock tilesize -int 40
   # Position
   defaults write com.apple.dock orientation -string "right"
+
+  # すべての（デフォルトの）アプリアイコンをDockから消去する
+  defaults write com.apple.dock persistent-apps -array
 }
 
 function setup_finder() {
+  # show litsview as default
+  defaults write com.apple.Finder FXPreferredViewStyle -string "Nlsv"
+  
   # Show Path bar
   defaults write com.apple.finder ShowPathbar -bool true
   # Show Side bar
@@ -224,13 +230,13 @@ function install_plists() {
 
 function main() {
   setup_system_preferences
-  install_xcode_command_line_tools
-  install_package_manager
-  install_packages
-  install_fonts
-  install_keyhac
-  install_mo
-  install_plists
+  # install_xcode_command_line_tools
+  # install_package_manager
+  # install_packages
+  # install_fonts
+  # install_keyhac
+  # install_mo
+  # install_plists
 }
 
 main
