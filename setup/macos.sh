@@ -10,6 +10,10 @@ LAUNCH_AGENTS_DIR="$HOME"/Library/LaunchAgents
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 MUSTACHE_FILES="${SCRIPT_DIR}/mac/launchd/*.mustache"
 
+function exists() {
+    which "$1" >/dev/null 2>&1
+    return $?
+}
 
 function setup_dock() {
   # Automatically hide
@@ -94,6 +98,10 @@ function setup_system_preferences() {
 function install_xcode_command_line_tools() {
   echo "Instaling Xcode Command Line Tools"
 
+  if exists "xcode-select"; then
+    echo "Xcode Command Line Tools: already exists"
+    return
+  fi
   xcode-select --install
 
   echo "Instaling Xcode Command Line Tools completed successfully"
