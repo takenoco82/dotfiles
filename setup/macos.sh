@@ -6,6 +6,11 @@
 
 set -eu
 
+LAUNCH_AGENTS_DIR="$HOME"/Library/LaunchAgents
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+MUSTACHE_FILES="${SCRIPT_DIR}/mac/launchd/*.mustache"
+
+
 function setup_dock() {
   # Automatically hide
   defaults write com.apple.dock autohide -bool true
@@ -173,6 +178,42 @@ function install_keyhac() {
   echo "Instaling Keyhac completed successfully"
 }
 
+# https://github.com/tests-always-included/mo
+function install_mo() {
+  echo "Instaling Mo"
+
+  # Download
+  curl -sSL https://git.io/get-mo -o mo
+
+  # Make executable
+  chmod +x mo
+
+  # Move to the right folder
+  sudo mv mo /usr/local/bin/
+
+  which mo
+
+  echo "Instaling Mo completed successfully"
+}
+
+function install_plists() {
+  echo "Instaling scripts to launchd"
+
+  mkdir -p "$LAUNCH_AGENTS_DIR"
+  mkdir -p "$LAUNCH_AGENTS_DIR/log"
+
+  for mustache_file in $MUSTACHE_FILES
+  do
+    local file_name_wo_ext=$(basename "$mustache_file" .mustache)
+    local plist_file="$LAUNCH_AGENTS_DIR"/"$file_name_wo_ext"
+
+    mo "$mustache_file" > $plist_file
+    launchctl load $plist_file
+  done
+
+  echo "Instaling scripts to launchd completed successfully"
+}
+
 function main() {
   setup_system_preferences
   install_xcode_command_line_tools
@@ -180,6 +221,8 @@ function main() {
   install_packages
   install_fonts
   install_keyhac
+  install_mo
+  install_plists
 }
 
 main
