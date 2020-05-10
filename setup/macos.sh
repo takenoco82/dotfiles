@@ -30,7 +30,7 @@ function setup_dock() {
 function setup_finder() {
   # show litsview as default
   defaults write com.apple.Finder FXPreferredViewStyle -string "Nlsv"
-  
+
   # Show Path bar
   defaults write com.apple.finder ShowPathbar -bool true
   # Show Side bar
@@ -78,6 +78,8 @@ function setup_keyboard() {
 function setup_trackpad() {
   # Tap to click
   defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
   # Enable Three finger drag
   defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
