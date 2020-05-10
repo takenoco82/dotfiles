@@ -173,6 +173,19 @@ function install_fonts() {
   brew tap homebrew/cask-fonts
   brew cask install font-source-han-code-jp
 
+  local temp_dir=$(mktemp -d)
+  (
+    cd $temp_dir
+
+    # https://github.com/powerline/fonts
+    git clone https://github.com/powerline/fonts.git --depth=1
+    # install
+    cd fonts
+    ./install.sh
+    # clean-up a bit
+  )
+  rm -rf $temp_dir
+
   echo "Instaling Fonts completed successfully"
 }
 
