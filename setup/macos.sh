@@ -65,7 +65,20 @@ function setup_datetime() {
   defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
 }
 
+function setup_language_region() {
+  # Set language and text formats
+  defaults write NSGlobalDomain AppleLanguages -array "en-JP" "ja-JP"
+  defaults write NSGlobalDomain AppleLocale -string "en_JP"
+  defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+  defaults write NSGlobalDomain AppleMetricUnits -bool true
+  defaults write NSGlobalDomain AppleTemperatureUnit -string "Celsius"
+}
+
 function setup_security_privacy() {
+  # Require password immediately after sleep or screen saver begins
+  defaults write com.apple.screensaver askForPassword -bool true
+  defaults write com.apple.screensaver askForPasswordDelay -int 0
+
   # ファイアーウォールをオンにする
   sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 }
@@ -73,16 +86,45 @@ function setup_security_privacy() {
 function setup_keyboard() {
   # Use F1, F2 etc. keys as standard function keys
   defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
+
+  # 修飾キー
+  #   CapsLock -> Command
+  local keyboard_id=1452-627-0
+  defaults -currentHost write -g com.apple.keyboard.modifiermapping.${keyboard_id} -array-add "
+<dict>
+  <key>HIDKeyboardModifierMappingDst</key>\
+  <integer>30064771299</integer>\
+  <key>HIDKeyboardModifierMappingSrc</key>\
+  <integer>30064771129</integer>\
+</dict>
+"
+  # Disable shortcuts
+  #   Mission Control
+  defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 32 "<dict><key>enabled</key><false/></dict>"
+  defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 34 "<dict><key>enabled</key><false/></dict>"
+  #   Application Windows
+  defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 33 "<dict><key>enabled</key><false/></dict>"
+  defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 35 "<dict><key>enabled</key><false/></dict>"
+  #   Input Sources
+  defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 60 "<dict><key>enabled</key><false/></dict>"
+  #   Spotlight
+  defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
+  defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 65 "<dict><key>enabled</key><false/></dict>"
 }
 
 function setup_trackpad() {
+  # Traking speed
+  defaults write NSGlobalDomain com.apple.trackpad.scaling -float 2.5
+
   # Tap to click
   defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
   defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
   defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
   # Enable Three finger drag
+  defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
   defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+  defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerDragGesture -bool true
 }
 
 function setup_system_preferences() {
@@ -92,6 +134,7 @@ function setup_system_preferences() {
   setup_finder
   setup_battery
   setup_datetime
+  setup_language_region
   setup_security_privacy
   setup_keyboard
   setup_trackpad
