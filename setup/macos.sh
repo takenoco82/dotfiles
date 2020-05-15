@@ -212,6 +212,23 @@ function install_packages() {
   echo "Instaling Packages completed successfully"
 }
 
+function setup_hyperswitch() {
+  # General
+  defaults write com.bahoom.HyperSwitch run_in_background -bool true
+  defaults write com.bahoom.HyperSwitch shift_to_cycle_backwards -bool true
+  # App Switcher
+  defaults write com.bahoom.HyperSwitch window_preview_allscreens -int 1
+  defaults write com.bahoom.HyperSwitch window_preview_allspaces -int 1
+  defaults write com.bahoom.HyperSwitch window_switcher_current_app_enabled -int 0
+  defaults write com.bahoom.HyperSwitch window_switcher_mod -int 2
+  # Appearance
+  defaults write com.bahoom.HyperSwitch app_icons_size -int 0
+  defaults write com.bahoom.HyperSwitch show_status_menu -bool true
+  defaults write com.bahoom.HyperSwitch snaphot_quality -int 2
+  # About
+  defaults write com.bahoom.HyperSwitch send_debugging_statistics -bool false
+}
+
 function install_fonts() {
   echo "Instaling Fonts"
 
@@ -288,13 +305,14 @@ function install_plists() {
 
 function main() {
   setup_system_preferences
-  # install_xcode_command_line_tools
-  # install_package_manager
-  # install_packages
-  # install_fonts
-  # install_keyhac
-  # install_mo
-  # install_plists
+  install_xcode_command_line_tools
+  install_package_manager
+  install_packages
+  setup_hyperswitch
+  install_fonts
+  install_keyhac
+  install_mo
+  install_plists
 }
 
 main
