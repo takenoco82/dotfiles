@@ -110,6 +110,9 @@ function setup_keyboard() {
   #   Spotlight
   defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 64 "<dict><key>enabled</key><false/></dict>"
   defaults write com.apple.symbolichotkeys.plist AppleSymbolicHotKeys -dict-add 65 "<dict><key>enabled</key><false/></dict>"
+
+  # Use keyboard navigation to move focus betoween controls
+  defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 }
 
 function setup_trackpad() {
@@ -191,9 +194,9 @@ function install_packages() {
   brew cask install appcleaner
   brew cask install dash
   brew cask install docker
-  brew cask install google-backup-and-sync
-  brew cask install google-chrome
-  brew cask install google-japanese-ime
+  # brew cask install google-backup-and-sync
+  # brew cask install google-chrome
+  # brew cask install google-japanese-ime
   brew cask install hyperswitch
   brew cask install iterm2
   brew cask install microsoft-teams
