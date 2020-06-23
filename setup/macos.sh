@@ -202,6 +202,7 @@ function install_packages() {
   brew cask install microsoft-teams
   brew cask install mysqlworkbench
   brew cask install onedrive
+  brew cask install scroll-reverser
   brew cask install spectacle
   brew cask install tableplus
   brew cask install visual-studio-code
