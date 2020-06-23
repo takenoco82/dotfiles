@@ -233,6 +233,11 @@ function setup_hyperswitch() {
   defaults write com.bahoom.HyperSwitch send_debugging_statistics -bool false
 }
 
+function setup_vscode() {
+  # VSCodeVim (https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
+  defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+}
+
 function install_fonts() {
   echo "Instaling Fonts"
 
@@ -313,6 +318,7 @@ function main() {
   install_package_manager
   install_packages
   setup_hyperswitch
+  setup_vscode
   install_fonts
   install_keyhac
   install_mo
