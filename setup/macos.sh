@@ -236,6 +236,9 @@ function setup_hyperswitch() {
 function setup_vscode() {
   # VSCodeVim (https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
   defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
+  # install im-select (https://github.com/daipeihust/im-select)
+  curl -Ls https://raw.githubusercontent.com/daipeihust/im-select/master/install_mac.sh | sh
 }
 
 function install_fonts() {
