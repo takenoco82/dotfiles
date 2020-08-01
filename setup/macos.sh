@@ -184,6 +184,7 @@ function install_packages() {
   brew install awscli
   brew install git
   brew install mycli
+  brew install nodenv
   brew install poetry
   brew install pyenv
   brew install starship

@@ -184,3 +184,5 @@ function showoptions() {
 # Starship
 # https://github.com/starship/starship
 eval "$(starship init zsh)"
+
+eval "$(nodenv init -)"
