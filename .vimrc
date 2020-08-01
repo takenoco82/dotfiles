@@ -145,10 +145,8 @@ if has('persistent_undo')
   set undodir=$MYVIMRUNTIME/undo
 endif
 
-" スワップファイルを作成する
-set swapfile
-" スワップファイル用ディレクトリ
-set directory=$MYVIMRUNTIME/tmp
+" スワップファイルを作成しない
+set noswapfile
 
 "-----------------------------------------------------------------------------
 " 端末オプション
