@@ -209,6 +209,7 @@ function install_packages() {
   brew cask install visual-studio-code
   brew cask install vlc
   brew cask install webex-meetings
+  brew cask install wireshark
 
   mas install 568494494  # Pocket
   mas install 803453959  # Slack
