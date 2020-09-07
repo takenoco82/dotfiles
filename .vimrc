@@ -35,7 +35,7 @@ if has('autocmd')
 endif
 
 " 改行コードの判定
-set fileformats=dos,unix,mac
+set fileformats=unix,dos,mac
 
 " □や△などを全角幅で表示する
 set ambiwidth=double
