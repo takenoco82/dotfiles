@@ -317,6 +317,20 @@ function install_plists() {
   echo "Instaling scripts to launchd completed successfully"
 }
 
+# https://sdkman.io/install
+function install_sdkman() {
+  echo "Instaling SDKMAN"
+
+  # Install
+  curl -s "https://get.sdkman.io" | bash
+
+  # 反映
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
+  sdk version
+
+  echo "Instaling SDKMAN completed successfully"
+}
+
 function main() {
   setup_system_preferences
   install_xcode_command_line_tools
@@ -328,6 +342,7 @@ function main() {
   install_keyhac
   install_mo
   install_plists
+  install_sdkman
 }
 
 main
