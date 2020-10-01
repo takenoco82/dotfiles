@@ -318,17 +318,21 @@ function install_plists() {
 }
 
 # https://sdkman.io/install
-function install_sdkman() {
-  echo "Instaling SDKMAN"
+function install_sdk() {
+  echo "Instaling SDK"
 
-  # Install
+  # Install SDKMAN!
   curl -s "https://get.sdkman.io" | bash
 
   # 反映
   source "$HOME/.sdkman/bin/sdkman-init.sh"
   sdk version
 
-  echo "Instaling SDKMAN completed successfully"
+  echo "Instaling SDK completed successfully"
+
+  # Install Java
+  sdk install java
+  java -version
 }
 
 function main() {
@@ -342,7 +346,7 @@ function main() {
   install_keyhac
   install_mo
   install_plists
-  install_sdkman
+  install_sdk
 }
 
 main
