@@ -339,6 +339,16 @@ function install_sdk() {
   mvn -v
 }
 
+# NOTE: install_sdk が実行済み
+function install_plantuml() {
+  echo "Instaling PlantUML"
+
+  brew install graphviz
+  brew install plantuml
+
+  echo "Instaling PlantUML completed successfully"
+}
+
 function main() {
   setup_system_preferences
   install_xcode_command_line_tools
@@ -351,6 +361,7 @@ function main() {
   install_mo
   install_plists
   install_sdk
+  install_plantuml
 }
 
 main
