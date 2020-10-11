@@ -52,7 +52,9 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # JAVA_HOMEを設定
-export JAVA_HOME=$(/usr/libexec/java_home)
+#export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$HOME/.sdkman/candidates/java/current
+export JDK_HOME=${JAVA_HOME}
 
 #-----------------------------------------------------------------------------
 # ヒストリの設定
