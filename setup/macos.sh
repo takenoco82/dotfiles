@@ -333,6 +333,10 @@ function install_sdk() {
   # Install Java
   sdk install java
   java -version
+
+  # Install Maven
+  sdk install maven
+  mvn -v
 }
 
 function main() {
